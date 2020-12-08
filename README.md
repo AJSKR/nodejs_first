@@ -62,10 +62,15 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
 - 첫 줄에 `const { Gitlab } = require('@gitbeaker/node');` 입력하고 저장. 커밋.
 - 사내 설치형 GitLab 쪽에서 bot 생성 및 토큰 발행. (자세한 설명 생략.)
 - 행추가 `const api = new Gitlab({ host: 'https://깃랩주소따오기', token: '토큰키따오기',});` 입력하고 저장. 커밋.
+- 콘솔에서 node 치고 들어가서 첫 행을 그대로 쳐보면 동작하지 않을 것임. 디펜던시 로드가 안되었기 때문. 일단 둠.
+- 지금쯤 remote 저장 시도 -> github 연계 열기 (추후 상술)
+- 콘솔에서 `npm add @gitbeaker/node` 실행.
+    - package.json 안에 `"dependencies": {"@gitbeaker/node": "^25.3.0"}` 같은 식으로 알아서 추가 됨.
+- node_modules 폴더가 생기고 수많은 파일들이 들어왔으므로, .gitignore 파일을 만들어 node_modules를 제외해야 commit이 평온해짐.
+    - .gitignore, package.json, package-lock.json 세 파일은 필요하므로 스테이징에 포함
+- 콘솔에서 node 치고 들어가서 첫 행을 그대로 쳐보면 동작함. Gitlab객체 접근 됨. 둘째 행도 실행될 것임. 저장. 커밋. 푸쉬.
 - 실작동을 위한 코딩. `require('http').createServer((req,res)=>{ 내용 구현 코드들 }).listen(8080);` 등등 입력. 저장. 커밋.
-- package.json 안에 `"dependencies": {"@gitbeaker/node": "^25.3.0"}` 추가
-- npm install, ...
-
+- 
 
 ## ToDo
 몰랑. 샘플 이미지 시침질? 봇?

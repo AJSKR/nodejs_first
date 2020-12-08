@@ -11,7 +11,7 @@ node.js를 처음 입문하는 한걸음 한걸음을 적어두는 레포지터�
 웹서버 상 개발과 웹브라우저 상 개발 둘 사이에 괴리감이 컸음.  
 node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 있게 해주기에 의미가 큼.  
 
-### 설치 (NVM)
+### Node.js 설치 (NVM)
 본 내용은 2020년도말 AWS에서 무료 프리티어 인스턴스를 만들어서 bash에서 진행한 것 위주로 기록함.  
 
 - 구글 검색 "nvm install" -> https://github.com/nvm-sh/nvm 에 도착. 아래 내용을 습득함.
@@ -30,6 +30,22 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
 - 어느 버젼을 사용할지 선택하는 use 명령어 실행: `nvm use ㅍ14.15.1`
 - 이제 node 명령어가 사용 가능해짐. `node -v` 라고 치면 버젼이 표시될 것임.
 - Node 사용 시작.
+
+### 작업 디렉토리 및 Git 설정
+깃의 경우 이 파일을 여기에 쓰고 있듯이, GitHub에 개인메일 아이디로 만든 AJSKR에서 사용하기로.  
+첫 프로젝트명 nodejs_first. 즉, github.com/AJSKR/nodejs_first  
+- AWS 인스턴스 로컬 상에서 개발 프로젝트를 하기 위한 경로로 ~(home) 아래에 src 생성.
+- GitHub에 이미 readme 등이 작성되어 있으므로, clone을 하여 시작하기로 함.
+    - src 경로에서 `git clone https://github.com/AJSKR/nodejs_first.git`
+    - 만약 반대로, AWS 로컬에서 먼저 npm, git 등을 이닛하고 github에 넣으려고 한다면 readme 때문에 머지를 하게될 듯.
+- clone이 마쳐지면 nodejs_first 폴더가 생기고 README.md와 . git 이 생겨 있음.
+    - git init을 마친 상태와 같으며, 덤으로 본 문서인 readme까지 동기화 된 상태. 아직 node 개발을 위한 init은 안된 상태.
+- node 개발 시작을 위해 `npm init -y` 실행.
+    - 초기화 되어 package.json 생성됨: name, version, description, main, scripts, keywords, author, license, repository, bugs, homepage
+    - 참고로 clone 안하고 npm init 시: name, version, description, main, scripts, keywords, author, license
+
+### 개발용 에디터 설정
+(작성중)
 
 ### ToDo
 몰랑. 샘플 이미지 시침질? 봇?

@@ -56,8 +56,14 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
 - welcome이 되면 Open Folder 버튼을 누르고 유저홈 아래 src 아래에 프로젝트 폴더 선택 open.
 - Ctrl+\`(틸드 아래 백틱) 누르면 AWS측 콘솔(터미널, 쉘)이 뜨니 명령어를 쳐보는 등 테스트.
 
-## 첫 프로그램
-(작성중)
+## 첫 프로그램 - issuePutBot
+- VS code 좌측뷰에 마우스 올리면 상단에 버튼이 생김. 새파일 만들기 누르고 파일 이름 지정: issuePushBot.js
+- GitLab 접근을 잘 짜 놓은걸 검색해서 찾음. GitBeaker. @gitbeaker/node
+- 첫 줄에 `const { Gitlab } = require('@gitbeaker/node');` 입력하고 저장. 커밋.
+- 사내 설치형 GitLab 쪽에서 bot 생성 및 토큰 발행. (자세한 설명 생략.)
+- 행추가 `const api = new Gitlab({ host: 'https://깃랩주소따오기', token: '토큰키따오기',});` 입력하고 저장. 커밋.
+- 실작동을 위한 코딩. `require('http').createServer((req,res)=>{ 내용 구현 코드들 }).listen(8080);` 등등 입력. 저장. 커밋.
+- 러닝 테스트
 
 ## ToDo
 몰랑. 샘플 이미지 시침질? 봇?

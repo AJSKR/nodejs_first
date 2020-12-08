@@ -20,14 +20,14 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
     - 참고로 wget의 경우 `wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash` 라고 안내되어 있음.
 - 유저홈에 .bashrc 마지막에 환경 관련 설정이 추가됨. 웹 안내에서 보면 아래와 같음.
     - `export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm`
-- 위 행 앞에 `source` 명령어를 붙여 실행하면 nvm 로드가 가능하겠으나, 그냥 `exit`하여 나간 후 다시 재접속하면 nvm 사용 가능해짐.
+- 위 bashrc를 `source` 명령어로 실행하면 nvm 로드가 가능하겠으나, 그냥 `exit`하여 나간 후 다시 재접속하면 nvm 사용 가능해짐.
 - `nvm` 명령어만 쳐보면 사용법이 길게 출력됨. 주로 쓰게 될 명령어는 install, use, run|exec, ls 정도.
-- `nvm ls`를 쳐보면 아무것도 설치되어 있지 않음을 알 수 있음.
+- `nvm ls`를 쳐보면 아무것도 설치되어 있지 않음을 알 수 있음. (`N/A⏎iojs -> N/A (default)⏎node -> stable (-> N/A) (default)⏎unstable -> N/A (default)`
 - `nvm ls-remote`라고 쳐보면 node.js 서버측에서 제공하는 설치 가능본 버젼 리스트가 나옴. LTS 버젼 중 사용 원하는 버젼 스트링을 따놓음.
 - 설치(install) 명령어에 버젼명을 쳐서 (예: `nvm install v14.15.1`) 설치함. 성공 메시지인지 확인 필요.
 - `nvm ls`를 다시 쳐보면 설치가 된 것을 확인 가능.
     - 참고 출력: `->     v14.15.1⏎default -> v14.15.1⏎iojs -> N/A (default)⏎unstable -> N/A (default)⏎node -> stable (-> v14.15.1) (default)⏎stable -> 14.15 (-> v14.15.1) (default)⏎lts/* -> lts/fermium (-> v14.15.1)⏎lts/argon -> v4.9.1 (-> N/A)⏎lts/boron -> v6.17.1 (-> N/A)⏎lts/carbon -> v8.17.0 (-> N/A)⏎lts/dubnium -> v10.23.0 (-> N/A)⏎lts/erbium -> v12.20.0 (-> N/A)⏎lts/fermium -> v14.15.1
-- 어느 버젼을 사용할지 선택하는 use 명령어 실행: `nvm use ㅍ14.15.1`
+- 어느 버젼을 사용할지 선택하는 use 명령어 실행: `nvm use v14.15.1`
 - 이제 node 명령어가 사용 가능해짐. `node -v` 라고 치면 버젼이 표시될 것임.
 - Node 사용 시작.
 
@@ -63,7 +63,9 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
 - 사내 설치형 GitLab 쪽에서 bot 생성 및 토큰 발행. (자세한 설명 생략.)
 - 행추가 `const api = new Gitlab({ host: 'https://깃랩주소따오기', token: '토큰키따오기',});` 입력하고 저장. 커밋.
 - 실작동을 위한 코딩. `require('http').createServer((req,res)=>{ 내용 구현 코드들 }).listen(8080);` 등등 입력. 저장. 커밋.
-- 러닝 테스트
+- package.json 안에 `"dependencies": {"@gitbeaker/node": "^25.3.0"}` 추가
+- npm install, ...
+
 
 ## ToDo
 몰랑. 샘플 이미지 시침질? 봇?

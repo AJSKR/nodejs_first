@@ -15,7 +15,7 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
 본 내용은 2020년도말 AWS에서 무료 프리티어 인스턴스를 만들어서 bash에서 진행한 것 위주로 기록함.  
 
 - 구글 검색 "nvm install" -> https://github.com/nvm-sh/nvm 에 도착. 아래 내용을 습득함.
-- node.js의 메인 실행파일인 node를 사용할 때에, 특정 버젼만 설치하면 의존성 등 난관을 겪으므로, 여러 버젼을 설치하거나 선택 실행할 수 있도록 하는 NVM(버젼매니져이자 패키지매니저)을 설치한 뒤 그를 통해 노드를 설치하고 버젼을 지정하여 사용하게 됨.
+- node.js의 메인 실행파일인 node를 사용할 때에, 특정 버젼만 설치하면 의존성 등 난관을 겪으므로, 여러 버젼을 설치하거나 선택 실행할 수 있도록 하는 NVM(버젼매니져)을 설치한 뒤 그를 통해 노드를 설치하고 버젼을 지정하여 사용하게 됨.
 - NVM설치: bash에서 설치를 위한 첫 행 입력 `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash`
     - 참고로 wget의 경우 `wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash` 라고 안내되어 있음.
 - 유저홈에 .bashrc 마지막에 환경 관련 설정이 추가됨. 웹 안내에서 보면 아래와 같음.

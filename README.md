@@ -48,12 +48,12 @@ node.js는 웹서버에서 자바스크립트(ecma 기준) 언어를 돌릴 수 
 2020년이니 VS Code + Remote 플러그인을 사용하기로 함
 - Microsoft 본진에서 VS Code 다운로드. 설치.
 - 좌측 아이콘 메뉴 중 네모4개 Extensions 들어가서 remote 검색 > 여거 패키지 중 통합패키지인 "Remote Developement" 설치.
-- 좌 하단 녹색 버튼 ">.<" 누르면 많은 메뉴 중 "Remote-SSH Connect to host" 선택.
-- VS Code 사용 컴퓨터 상 유저홈(~) 폴더 아래 .ssh 경로에 config 파일 두고 내용 편집.
-    - 내용: Host AWS_AJ_PE / HostName 52.14.92.216 / IdentityFile ~\.ssh\AWJAAMC.pem / User ubuntu
+- 좌 하단 녹색 버튼 ">.<" 누르면 많은 메뉴 중 "Remote-SSH Connect to host" 로 아이디@접속주소 입력하고 다음 창에서 비번 등 입력.
+- 참고로, Add new host에서 접속 커맨드 입력하여 반복접속 대상을 설정하여 VS Code 사용 컴퓨터 상 유저홈(~) .ssh 폴더에 config 파일에 저장 가능.
+    - 내용예시: Host AWS_AJ_PE / HostName 아이피주소 / IdentityFile ~\.ssh\pem파일이름 / User ubuntu
     - 참고로, 자동생성시 위 세번째 항목에서의 경로명에 구분자 입력처리가 제대로 안되니, 편집하여 넣어줘야 함.
 - AWS 지정하여 접속해 봄. 접속 성공시 서버 종류를 물어 옴. Linux로 지정.
-- welcome이 되면 Open Folder 버튼을 누르고 유저홈 아래 src 아래에 프로젝트 폴더 선택 open.
+- welcome 뜨면 좌측 메뉴중 문서두개 아이콘인 Explorer에서 Open Folder 버튼을 누르고 유저홈 아래 src 아래에 프로젝트 폴더 선택 open.
 - Ctrl+\`(틸드 아래 백틱) 누르면 AWS측 콘솔(터미널, 쉘)이 뜨니 명령어를 쳐보는 등 테스트.
 
 ## 첫 프로그램 - issuePutBot

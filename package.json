@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/AJSKR/nodejs_first/issues"
   },
-  "homepage": "https://github.com/AJSKR/nodejs_first#readme"
+  "homepage": "https://github.com/AJSKR/nodejs_first#readme",
+  "dependencies": {
+    "@gitbeaker/node": "^26.0.0"
+  }
 }

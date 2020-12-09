@@ -2,7 +2,7 @@
   "name": "nodejs_first",
   "version": "1.0.0",
   "description": "Log first step experience to Node.js",
-  "main": "index.js",
+  "main": "issuePushBot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,8 +16,5 @@
   "bugs": {
     "url": "https://github.com/AJSKR/nodejs_first/issues"
   },
-  "homepage": "https://github.com/AJSKR/nodejs_first#readme",
-  "dependencies": {
-    "@gitbeaker/node": "^26.0.0"
-  }
+  "homepage": "https://github.com/AJSKR/nodejs_first#readme"
 }

@@ -65,9 +65,9 @@ node.js의 메인 실행파일인 node를 사용할 때에, 특정 버젼만 설
 - VS Code (이하 code로 짧게 칭함) 실행. 새로운 환경의 첫실행 때마다 나오는 웰컴독은 바로 닫아버려도 무방함.
 - 좌측 아이콘 메뉴 중 네모4개 Extensions 들어가서 remote 검색 > 여거 패키지 중 통합패키지인 "Remote Developement" 설치.
 - 좌 하단 녹색 버튼 ">.<" 누르면 많은 메뉴 중 "Remote-SSH Connect to host" 로 아이디@접속주소 입력하고 다음 창에서 비번 등 입력.
-  - 참고로, Add new host에서 접속 커맨드 입력하여 반복접속 대상을 설정하여 VS Code 사용 컴퓨터 상 유저홈(~) .ssh 폴더에 config 파일에 저장 가능.
-    - 내용예시: Host AWS_AJ_PE / HostName 아이피주소 / IdentityFile ~\.ssh\pem파일이름 / User ubuntu
-    - 참고로, 자동생성시 위 세번째 항목에서의 경로명에 구분자 입력처리가 제대로 안되니, 다시 편집하여 구분자를 넣어줘야 함.
+  - 참고로, Add new host에서 접속 커맨드 그대로 입력하여 반복접속 대상을 설정하여 VS Code 사용 컴퓨터 상 유저홈(~) .ssh 폴더에 config 파일에 저장 가능.
+    - 내용예시: Host AWS_AJ_PE / HostName 아이피주소 / IdentityFile ~\\.ssh\\pem파일이름 / User ubuntu
+    - 참고로, 자동생성시 위 세번째 항목에서의 경로명은 슬래쉬 아닌 MS컨벤션(역슬래쉬)로 해야하며, 자동 생성시 구분자가 제대로 안써질 때가 있음. 다시 편집하여 구분자를 넣어줘야 함.
 - Remote 접속 선택하면 새창이 뜸. AWS 인스턴스에 접속해 봄. 접속 성공시 서버 종류를 물어 옴. Linux로 지정.
   - 참고로, VS code 에디터는 접속 성공시 대상 서버 상에 .vscode 폴더를 만들어서 code용 환경 및 사용자 설정을 저장하게 됨.
 - welcome 뜨면 좌측 메뉴중 문서두개 아이콘인 Explorer에서 Open Folder 버튼을 누르고 유저홈 아래 src 아래에 프로젝트 폴더 선택 open.

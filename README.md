@@ -42,27 +42,36 @@ node.js의 메인 실행파일인 node를 사용할 때에, 특정 버젼만 설
 ## 작업 디렉토리 및 Git 설정
 깃의 경우 이 파일을 여기에 쓰고 있듯이, GitHub에 개인메일 아이디로 만든 AJSKR에서 사용하기로.  
 첫 프로젝트명 nodejs_first. 즉, github.com/AJSKR/nodejs_first  
-- AWS 인스턴스 로컬 상에서 개발 프로젝트를 하기 위한 경로로 ~(home) 아래에 src 생성.
-- GitHub에 이미 readme 등이 작성되어 있으므로, clone을 하여 시작하기로 함.
-    - src 경로에서 `git clone https://github.com/AJSKR/nodejs_first.git`
-    - 만약 반대로, AWS 로컬에서 먼저 npm, git 등을 이닛하고 github에 넣으려고 한다면 readme 때문에 머지를 하게될 듯.
-- clone이 마쳐지면 nodejs_first 폴더가 생기고 README.md와 . git 이 생겨 있음.
-    - git init을 마친 상태와 같으며, 덤으로 본 문서인 readme까지 동기화 된 상태. 아직 node 개발을 위한 init은 안된 상태.
-- node 개발 시작을 위해 `npm init -y` 실행.
-    - 초기화 되어 package.json 생성됨: name, version, description, main, scripts, keywords, author, license, repository, bugs, homepage
+- **개발용 디렉토리**: AWS 인스턴스 상에서 직접 소스 파일을 두고 수정하며 즉시 확인하며 개발하기로.
+  - 내가 접속용으로 쓰는 (터미널 역할의) 컴퓨터에는 굳이 소스를 두거나 편집하지 않아도 됨. 모든 작업은 리모트로.
+  - AWS 인스턴스에 SSH 접속. 기본 아이디는 우분투 영어로. 접속 직후 홈폴더에 있게 되는 것이 상식이나, 확실히 하기 위해: `cd` 혹은 `cd ~`를 입력.
+  - 홈 폴더 (홈디렉토리) 아래에 개발 프로젝트를 하기 위한 경로로 src 라는 이름의 폴더(디렉토리) 생성: `mkdir src`
+  - src 폴더 아래에 한가지 씩의 프로젝트 폴더를 만들어야 할 것이나, git clone을 하게 되면 자동으로 생길 것이므로 스킵.
+- **GIT CLONE**: 위 설명한 GitHub에 이미 readme 등이 작성되어 있으므로, clone을 하여 시작하기로 함. (만약 반대로, AWS에서 먼저 npm, git 등을 이닛하고 github에 넣으려고 한다면 readme 때문에 머지를 하는 등 복잡함.)
+  - `git` 명령어를 쳐서 git이 사용 가능한지 확인. 없으면 설치: `sudo apt-get update` 치고 `sudo apt install git` (또는 git-all)
+  - src 경로에서 클론 명령어 입력: `git clone https://github.com/AJSKR/nodejs_first.git`
+  - clone이 정상적으로 마쳐지면 nodejs_first 폴더가 생기고 README.md와 . git 이 생겨 있음.
+  - 클론을 했으므로 당연히 .git이 생성되어 있고, 별도의 git init 필요 없음. 덤으로 본 문서인 readme까지 동기화 됨.
+  - 아직 노드 개발을 위한 node 쪽 init은 되지 않은 상태임.
+- **node 개발 시작**: 지금까지의 과정은 시스템 전체에 노드를 설치하고, 어떤 언어든지 형상관리가 가능한 git 설정을 마친 것.
+  - 노드 개발을 시작하기 위해 nodejs_first 폴더에 들어가서 (`cd nodejs_first`) 초기화 명령어 `npm init -y` 실행.
+  - 초기화 되어 package.json 생성됨: name, version, description, main, scripts, keywords, author, license, repository, bugs, homepage
     - 참고로 clone 안하고 npm init 시: name, version, description, main, scripts, keywords, author, license
+  - 이제 node 개발을 시작하면 됨, 노드용 패키지들을 추가 설치하게 되는 등의 상황 대비를 위해 .gitignore 설정이 필요함. 추후 설명됨.
 
 ## 개발용 에디터 설정
-2020년이니 VS Code + Remote 플러그인을 사용하기로 함
-- Microsoft 본진에서 VS Code 다운로드. 설치.
+2020년이니 VS Code + Remote 플러그인을 사용하기로 함. AWS 인스턴스 상에 있는 소스를 직접 다루며 개발 가능함.
+- 구글 검색 등, Microsoft 본진 웹사이트에 가서 VS Code 다운로드. 설치. (AWS쪽이 아니라, 내가 사용하는 컴퓨터에 설치말임.)
+- VS Code (이하 code로 짧게 칭함) 실행. 새로운 환경의 첫실행 때마다 나오는 웰컴독은 바로 닫아버려도 무방함.
 - 좌측 아이콘 메뉴 중 네모4개 Extensions 들어가서 remote 검색 > 여거 패키지 중 통합패키지인 "Remote Developement" 설치.
 - 좌 하단 녹색 버튼 ">.<" 누르면 많은 메뉴 중 "Remote-SSH Connect to host" 로 아이디@접속주소 입력하고 다음 창에서 비번 등 입력.
-- 참고로, Add new host에서 접속 커맨드 입력하여 반복접속 대상을 설정하여 VS Code 사용 컴퓨터 상 유저홈(~) .ssh 폴더에 config 파일에 저장 가능.
+  - 참고로, Add new host에서 접속 커맨드 입력하여 반복접속 대상을 설정하여 VS Code 사용 컴퓨터 상 유저홈(~) .ssh 폴더에 config 파일에 저장 가능.
     - 내용예시: Host AWS_AJ_PE / HostName 아이피주소 / IdentityFile ~\.ssh\pem파일이름 / User ubuntu
-    - 참고로, 자동생성시 위 세번째 항목에서의 경로명에 구분자 입력처리가 제대로 안되니, 편집하여 넣어줘야 함.
-- AWS 지정하여 접속해 봄. 접속 성공시 서버 종류를 물어 옴. Linux로 지정.
+    - 참고로, 자동생성시 위 세번째 항목에서의 경로명에 구분자 입력처리가 제대로 안되니, 다시 편집하여 구분자를 넣어줘야 함.
+- Remote 접속 선택하면 새창이 뜸. AWS 인스턴스에 접속해 봄. 접속 성공시 서버 종류를 물어 옴. Linux로 지정.
+  - 참고로, VS code 에디터는 접속 성공시 대상 서버 상에 .vscode 폴더를 만들어서 code용 환경 및 사용자 설정을 저장하게 됨.
 - welcome 뜨면 좌측 메뉴중 문서두개 아이콘인 Explorer에서 Open Folder 버튼을 누르고 유저홈 아래 src 아래에 프로젝트 폴더 선택 open.
-- Ctrl+\`(틸드 아래 백틱) 누르면 AWS측 콘솔(터미널, 쉘)이 뜨니 명령어를 쳐보는 등 테스트.
+- Ctrl+\`(틸드 아래 백틱) 누르면 AWS측 콘솔(터미널, 쉘)이 뜨니 명령어를 쳐보는 등 테스트. 코딩 편집 준비 완료.
 
 ## 첫 프로그램 - issuePutBot
 - VS code 좌측뷰에 마우스 올리면 상단에 버튼이 생김. 새파일 만들기 누르고 파일 이름 지정: issuePushBot.js

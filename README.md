@@ -23,7 +23,7 @@ node.js의 메인 실행파일인 node를 사용할 때에, 특정 버젼만 설
 마련된 AWS 인스턴스에서 웹서버 등 역할을 하며 웹앱을 돌리려면, 다른 (아파치 및 언어 등) 설치 필요없이 node.js만 설치해도 무방함.  
 바로 노드를 설치해도 되겠으나, 위 설명대로 NVM을 설치하고 NVM을 통하여 node의 버젼을 선택적으로 관리/선택해가며 사용함.
 - **설치**: 구글 검색 "nvm install" -> https://github.com/nvm-sh/nvm 에 도착. 아래 내용을 습득함.
-  - NVM설치: bash에서 설치를 위한 첫 행을 입력함.
+  - NVM설치: AWS 접속, bash 상 home 폴더(~)에서 설치를 위한 첫 행을 입력함.
     - 컬이 가능하면 `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash`
     - 참고로 wget의 경우 `wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash`
   - 유저홈에 .bashrc 마지막에 환경 관련 설정이 추가됨. 웹 안내에서 보면 아래와 같음.

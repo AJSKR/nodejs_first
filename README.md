@@ -81,6 +81,9 @@ AWS 인스턴스에서 node가 실행되어 웹훅을 기다리고, ip주소에 
 - 실행될 JS(자바스크립트) 본체 파일 만들기.
   - AWS에 Remote 접속된 VS code 화면, 좌측 파일뷰에 마우스 올리면 상단에 여러가지 new 버튼이 생김. 
   - 새파일 만들기를 누르고 파일 이름 지정: issuePutBot.js
+  - 참고로, AWS 상에서만 Local적인 git commit을 자주 하면서 개발하는 것을 권장.
+    - 콘솔에서 한다면 `git add .` 실행 후 `gir commit -am "message"`
+    - code 화면에서는 좌측 아이콘 메뉴 중 git tree 모양에서 상단 message 입력 후 Ctrl+Enter 눌러 commit 가능. (컨펌창 yes로 auto add)
 - 일단 gitlab쪽에 자동으로 새 이슈를 작성해주는 쪽 기능을 먼저 짜보겠음.
   - node 세상에 선지자들이 GitLab 접근을 잘 짜 놓은 패키지를 검색해서 찾음: GitBeaker. @gitbeaker/node
   - 예제를 익힌대로, 첫 줄에 `const { Gitlab } = require('@gitbeaker/node');` 입력하고 저장. 커밋.
@@ -95,7 +98,9 @@ AWS 인스턴스에서 node가 실행되어 웹훅을 기다리고, ip주소에 
   - node 프롬프트에서 위에 코딩한 첫 행을 그대로 쳐 볼 수 있으나... 아직은 동작하지 않을 것임. (에러남)
   - 아직 디펜던시 로드가 안되었기 때문. 소스는 일단 이 상태로 저장해 둠.
 - Git remote repository 저장.
-  - 지금쯤 remote 저장 시도 -> github 연계 열기 (추후 상술)
+  - 지금쯤 remote 저장을 시도하여 세팅을 맞춤. 콘솔에서라면 `git push`
+  - code 화면에서는 좌측 아이콘 메뉴 중 Git에서 상단 최우측 (...) 버튼을 눌러 push 가능.
+    - 최초 시도시에는 몇가지 컨펌 대화창과 웹페이지 팝업 auth를 통해 접속설정을 하게 됨.
 ### 두번째 걸음
 - 패키지를 설치하여 로드하고 객체가 생성되는 과정까지 보겠음.
 - 위에 말한 gitbeaker 패키지를 끌어와 AWS 해당 폴더 안에 퍼 넣을 것임.
@@ -106,7 +111,7 @@ AWS 인스턴스에서 node가 실행되어 웹훅을 기다리고, ip주소에 
   - .gitignore, package.json, package-lock.json 세 파일은 형상관리상 필요하므로 제외설정하지 않음 (행 추가 하지 않고 둠)
 - 이제 콘솔에서 node 치고 들어가서 위 JS 코드들을 순서대로 실행해 볼 수 있음.
   - 콘솔 node 상에서 첫 행을 그대로 쳐보면 동작할 것임. 
-  - Gitlab이라고 쳐보면 객체 접근 될 것임. 둘째 행도 실행해보면 잘 될 것임. 저장. 커밋. 푸쉬.
+  - Gitlab 혹은 api 등을 쳐보면 객체 접근 될 것임. 둘째 행도 실행해보면 잘 될 것임. 저장. 커밋. 푸쉬.
 ### 세번째 걸음
 - curl까지 돌아가는 상태까지 완성해볼 것임.
 - require, createServer 코드로 리퀘스트 레스폰스 구성, listen을 거는 코드를 실행하여 가장 간단한 서버 구동.

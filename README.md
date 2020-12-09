@@ -74,20 +74,64 @@ node.js의 메인 실행파일인 node를 사용할 때에, 특정 버젼만 설
 - Ctrl+\`(틸드 아래 백틱) 누르면 AWS측 콘솔(터미널, 쉘)이 뜨니 명령어를 쳐보는 등 테스트. 코딩 편집 준비 완료.
 
 ## 첫 프로그램 - issuePutBot
-- VS code 좌측뷰에 마우스 올리면 상단에 버튼이 생김. 새파일 만들기 누르고 파일 이름 지정: issuePushBot.js
-- GitLab 접근을 잘 짜 놓은걸 검색해서 찾음. GitBeaker. @gitbeaker/node
-- 첫 줄에 `const { Gitlab } = require('@gitbeaker/node');` 입력하고 저장. 커밋.
-- 사내 설치형 GitLab 쪽에서 bot 생성 및 토큰 발행. (자세한 설명 생략.)
-- 행추가 `const api = new Gitlab({ host: 'https://깃랩주소따오기', token: '토큰키따오기',});` 입력하고 저장. 커밋.
-- 콘솔에서 node 치고 들어가서 첫 행을 그대로 쳐보면 동작하지 않을 것임. 디펜던시 로드가 안되었기 때문. 일단 둠.
-- 지금쯤 remote 저장 시도 -> github 연계 열기 (추후 상술)
-- 콘솔에서 `npm add @gitbeaker/node` 실행.
-    - package.json 안에 `"dependencies": {"@gitbeaker/node": "^25.3.0"}` 같은 식으로 알아서 추가 됨.
-- node_modules 폴더가 생기고 수많은 파일들이 들어왔으므로, .gitignore 파일을 만들어 node_modules를 제외해야 commit이 평온해짐.
-    - .gitignore, package.json, package-lock.json 세 파일은 필요하므로 스테이징에 포함
-- 콘솔에서 node 치고 들어가서 첫 행을 그대로 쳐보면 동작함. Gitlab객체 접근 됨. 둘째 행도 실행될 것임. 저장. 커밋. 푸쉬.
-- 실작동을 위한 코딩. `require('http').createServer((req,res)=>{ 내용 구현 코드들 }).listen(8080);` 등등 입력. 저장. 커밋.
-- 
+첫번째로 작성해볼 웹앱은 사내컴 도구인 slack 상에서 특정 채널에 새 글이 생기면 퍼와서 
+사내개발 도구인 gitlab 특정 프로젝트에 이슈로 등록하는 기능을 수행하는 연계봇임.  
+AWS 인스턴스에서 node가 실행되어 웹훅을 기다리고, ip주소에 curl post 들어오면 내용대로 gitlab에 이슈 작성 봇을 호출하는 녀석.
+### 첫걸음 떼기
+- 실행될 JS(자바스크립트) 본체 파일 만들기.
+  - AWS에 Remote 접속된 VS code 화면, 좌측 파일뷰에 마우스 올리면 상단에 여러가지 new 버튼이 생김. 
+  - 새파일 만들기를 누르고 파일 이름 지정: issuePutBot.js
+- 일단 gitlab쪽에 자동으로 새 이슈를 작성해주는 쪽 기능을 먼저 짜보겠음.
+  - node 세상에 선지자들이 GitLab 접근을 잘 짜 놓은 패키지를 검색해서 찾음: GitBeaker. @gitbeaker/node
+  - 예제를 익힌대로, 첫 줄에 `const { Gitlab } = require('@gitbeaker/node');` 입력하고 저장. 커밋.
+- GitLab 쪽에서 봇을 만들고 토큰 등을 설정해야함. 사내 설치 GitLab(등)에서 bot 생성 및 토큰 발행.
+  - (자세한 설명은 생략. 추후 업데이트하겠음.)
+- 다시 AWS 상 개발하는 JS 코드로 돌아와서... issuePutBot.js 파일 편집.
+  - 실제 다룰 객체를 생성해본다는 느낌으로 머릿속 코딩.
+  - 행추가 `const api = new Gitlab({ host: 'https://깃랩주소따오기', token: '토큰키따오기',});` 입력하고 저장. 커밋.
+- 실행 확인. JS 파일 상의 모든 내용은, AWS 콘솔에서 node 실행해들어가 그 안에서 한줄 한줄을 치는 것과 똑같음. 테스트 해보자면.
+  - AWS에 따로 SSH 접속하여 콘솔에서 명령어를 치는 것과, code 화면상 ctrl+\`(틸드_백틱 키)를 눌러 하단에 나온 콘솔창에 치는 것과 동일함.
+  - 콘솔에서 명령어로 `node` 치고 들어가면 node의 프롬프트에서 JS 코드 라인을 쳐 넣을 수 있음.
+  - node 프롬프트에서 위에 코딩한 첫 행을 그대로 쳐 볼 수 있으나... 아직은 동작하지 않을 것임. (에러남)
+  - 아직 디펜던시 로드가 안되었기 때문. 소스는 일단 이 상태로 저장해 둠.
+- Git remote repository 저장.
+  - 지금쯤 remote 저장 시도 -> github 연계 열기 (추후 상술)
+### 두번째 걸음
+- 패키지를 설치하여 로드하고 객체가 생성되는 과정까지 보겠음.
+- 위에 말한 gitbeaker 패키지를 끌어와 AWS 해당 폴더 안에 퍼 넣을 것임.
+  - AWS 콘솔에서 (SSH 혹은 code 화면 콘솔창) issuePutBot 경로에 가서 `npm add @gitbeaker/node` 실행.
+  - package.json 안에 `"dependencies": {"@gitbeaker/node": "^25.3.0"}` 같은 식으로 알아서 추가 됨.
+- node_modules 폴더가 생기고 수많은 파일들이 들어왔으므로, 깃 저장 제외 설정을 해야 추후 commit이 평온해짐.
+  - .gitignore 파일을 만들고, node_modules 라고 쓴 1행을 추가함.
+  - .gitignore, package.json, package-lock.json 세 파일은 형상관리상 필요하므로 제외설정하지 않음 (행 추가 하지 않고 둠)
+- 이제 콘솔에서 node 치고 들어가서 위 JS 코드들을 순서대로 실행해 볼 수 있음.
+  - 콘솔 node 상에서 첫 행을 그대로 쳐보면 동작할 것임. 
+  - Gitlab이라고 쳐보면 객체 접근 될 것임. 둘째 행도 실행해보면 잘 될 것임. 저장. 커밋. 푸쉬.
+### 세번째 걸음
+- curl까지 돌아가는 상태까지 완성해볼 것임.
+- require, createServer 코드로 리퀘스트 레스폰스 구성, listen을 거는 코드를 실행하여 가장 간단한 서버 구동.
+  - 실작동을 위한 코딩. `require('http').createServer((req,res)=>{ 내용 구현 코드들 }).listen(8080);` 등등 입력. 저장. 커밋.
+  - 콘솔에서 코드들을 다 동작해 봄. 에러 안나는지 확인.
+### 노드로 실행 (start)
+- 동작이 확인되면, package 파일에 scripts 섹션에서 start 설정 필요.
+  - `"scripts": { [개행] "start": "node issuePutBot.js", ` 와 같이 추가해 넣음.
+- 이제 콘솔서 `npm start` 실행시 issuePutBot.js 가 실행될 것이므로 listen이 돌게 됨.
+  - 봇 구동이 시작된 것임. 여러개 실행되지 않도록 주의.
+  - node를 끄고 나가는 방법은 Ctrl+c를 여러번 누르는 것임.
+- code 화면에서는 디버그가 가능해 짐. 여기에서 실행해도 서버 동작 함. 당연히 디버그도 됨.
+  - package.json 문서를 봤을 때에 5행 즈음에 삼각형 Debug 버튼이 생김.
+  - 눌러서 start 선택하면 구동 됨. 이후 code 에디터에서 걸어둔 브레이크 포인트 등도 사용 가능.
+### 봇 구동 테스트
+- curl 명령어로 해당 봇을 호출하면, gitlab측에 새 이슈가 등록되는 것을 확인 가능함.
+ - 컬 예문: `curl -X POST 54.180.201.194:8080 --data '{"title":"test #", "description":"works well"}'`
+ - 정상 동작 시 대상 gitlab 프로젝트 이슈란에 제목이 "test #"이고 본문이 "works well"인 이슈가 생성됨.
+- 테스트를 위함이니, 해당 AWS 인스턴스가 아닌 외부 어떤 환경 중 curl 명령이 가능한 콘솔에서 테스트.
+  - 좋은 예로, AWS쪽이 아니라, 내 앞에 code를 돌리고 있는 현재 작업 컴퓨터의 shell에서 테스트 가능함.
+    - MS 아닌 대부분의 OS에서는 위 컬문을 그대로 타이핑 가능함.
+    - Windows 등 MS의 OS인 경우 따옴표 규칙 때문에 일리걸이 뜸. CMD나 PS나 다 마찬가지.
+      - MS에서 좋은 방법은... WSL 혹은 GIT-SCM에서 git을 설치하는 등으로 나오는 bash를 깔고 실행하는 것.
+  - 참고로, 웹브라우저에서 호출할 수도 있지만, 아직 GET 파싱 루틴을 안짰으므로 불가.
+- gitlab에서 이슈가 생성된 것을 확인 가능.
 
 ## ToDo
-몰랑. 샘플 이미지 시침질? 봇?
+샘플 이미지 시침질?
